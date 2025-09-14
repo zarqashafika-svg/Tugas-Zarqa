@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keseharianku</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #e3f2fd, #e1f5fe);
+      color: #1565c0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #1976d2;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #90caf9;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: linear-gradient(to right, #64b5f6, #4fc3f7);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #42a5f5, #29b6f6);
+    }
+
+    #hasilcerita {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>KESEHARIANKU DARI PAGI SAMPAI MALAM</h1>
+
+    <script>
+      var yakin = confirm("안녕, selamat datang di cerita keseharianku");
+      if (yakin) {
+        alert('Saya membuat form sendiri');
+      } else {
+        window.location = "https://www.detik.com";
+      }
+    </script>
+
+    <form id="FormZarqa">
+      <label>aku :</label>
+      <input type="text" id="aku" placeholder="zarqa" required>
+
+      <label>semangat :</label>
+      <input type="text" id="semangat" placeholder="kuat" required>
+
+      <label>lalu :</label>
+      <input type="text" id="lalu" placeholder="setelah itu" required>
+
+      <label>menumpuk :</label>
+      <input type="text" id="menumpuk" placeholder="banyak" required>
+
+      <label>mendengar :</label>
+      <input type="text" id="mendengar" placeholder="membaca" required>
+
+      <button type="submit">Tampilkan Cerita</button>
+    </form>
+
+    <div id="hasilcerita" style="display:none;"></div>
+  </div>
+
+  <!-- file eksternal untuk isi cerita -->
+  <script src="pagi.js"></script>
+  <script src="siang.js"></script>
+  <script src="malam.js"></script>
+
+  <script>
+    const form = document.getElementById("FormZarqa");
+    const hasil = document.getElementById("hasilcerita");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      //Ambil data dari input
+      const aku = document.getElementById("aku").value;
+      const semangat= document.getElementById("semangat").value;
+      const lalu = document.getElementById("lalu").value;
+      const menumpuk = document.getElementById("menumpuk").value;
+      const mendengar = document.getElementById("mendengar").value;
+      
+      // Gabungkan cerita dari 3 file JS
+      const ceritaHTML = `
+        <h2>KESEHARIANKU</h2>
+        ${pagi(aku, semangat, lalu)}
+        ${siang(aku, menumpuk, lalu)}
+        ${malam(aku, mendengar, semangat)}
+      `;
+      
+      hasil.style.display = "block";
+      hasil.innerHTML = ceritaHTML;
+    });
+  </script>
+</body>
+</html>
